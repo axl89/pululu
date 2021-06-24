@@ -9,6 +9,9 @@
 - [auto/nodejs] - Fail early when multiple versions of `@pulumi/pulumi` are detected in nodejs inline programs.'
   [#7349](https://github.com/pulumi/pulumi/pull/7349)
 
+- Initial support for resource methods (Node.js authoring, Python calling)
+  [#7363](https://github.com/pulumi/pulumi/pull/7363)
+
 ### Bug Fixes
 
 - [sdk/dotnet] - Fix swallowed nested exceptions with inline program so they correctly bubble to consumer
