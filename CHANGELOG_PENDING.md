@@ -8,6 +8,9 @@
 
 - [auto/nodejs] - Fail early when multiple versions of `@pulumi/pulumi` are detected in nodejs inline programs.'
   [#7349](https://github.com/pulumi/pulumi/pull/7349)
+  
+- [sdk] - Add `replaceOnChanges` resource option.
+  [#7226](https://github.com/pulumi/pulumi/pull/7226)
 
 ### Bug Fixes
 
