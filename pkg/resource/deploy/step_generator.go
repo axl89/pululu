@@ -654,6 +654,13 @@ func (sg *stepGenerator) generateStepsFromDiff(
 		}, nil
 	}
 
+	// If resource was unchanged, but there were initialization errors, generate an empty update
+	// step to attempt to "continue" awaiting initialization.
+	if hasInitErrors {
+		sg.updates[urn] = true
+		return []Step{NewUpdateStep(sg.deployment, event, old, new, diff.StableKeys, nil, nil, nil)}, nil
+	}
+
 	// Else there are no changes needed
 	return nil, nil
 }
@@ -1268,7 +1275,7 @@ func (sg *stepGenerator) applyReplaceOnChanges(diff plugin.DiffResult,
 		DetailedDiff:        modifiedDiff,
 		ReplaceKeys:         modifiedReplaceKeys,
 		ChangedKeys:         diff.ChangedKeys,
-		Changes:             diff.Changes,
+		Changes:             plugin.DiffSome,
 		DeleteBeforeReplace: diff.DeleteBeforeReplace,
 		StableKeys:          diff.StableKeys,
 	}, nil
