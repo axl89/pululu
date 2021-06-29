@@ -1267,6 +1267,7 @@ func (sg *stepGenerator) applyReplaceOnChanges(diff plugin.DiffResult,
 					Kind:      plugin.DiffUpdateReplace,
 					InputDiff: false,
 				}
+				diff.Changes = plugin.DiffSome
 			}
 		}
 	}
@@ -1275,7 +1276,7 @@ func (sg *stepGenerator) applyReplaceOnChanges(diff plugin.DiffResult,
 		DetailedDiff:        modifiedDiff,
 		ReplaceKeys:         modifiedReplaceKeys,
 		ChangedKeys:         diff.ChangedKeys,
-		Changes:             plugin.DiffSome,
+		Changes:             diff.Changes,
 		DeleteBeforeReplace: diff.DeleteBeforeReplace,
 		StableKeys:          diff.StableKeys,
 	}, nil
