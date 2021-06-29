@@ -1190,7 +1190,7 @@ func (sg *stepGenerator) getProviderResource(urn resource.URN, provider string) 
 }
 
 // initErrorSpecialKey is a special property key used to indicate that a diff is due to
-// intiialization errors existing in the old state instead of due to a specific proeprty
+// initialization errors existing in the old state instead of due to a specific property
 // diff between old and new states.
 const initErrorSpecialKey = "#initerror"
 
@@ -1255,6 +1255,7 @@ func (sg *stepGenerator) applyReplaceOnChanges(diff plugin.DiffResult,
 	}
 
 	// Add init errors to modified diff results
+	modifiedChanges := diff.Changes
 	if hasInitErrors {
 		for _, replaceOnChangePath := range replaceOnChangePaths {
 			initErrPath, err := resource.ParsePropertyPath(initErrorSpecialKey)
@@ -1267,7 +1268,8 @@ func (sg *stepGenerator) applyReplaceOnChanges(diff plugin.DiffResult,
 					Kind:      plugin.DiffUpdateReplace,
 					InputDiff: false,
 				}
-				diff.Changes = plugin.DiffSome
+				// If an init error is present on a path that causes replacement, then trigger a replacement.
+				modifiedChanges = plugin.DiffSome
 			}
 		}
 	}
@@ -1276,7 +1278,7 @@ func (sg *stepGenerator) applyReplaceOnChanges(diff plugin.DiffResult,
 		DetailedDiff:        modifiedDiff,
 		ReplaceKeys:         modifiedReplaceKeys,
 		ChangedKeys:         diff.ChangedKeys,
-		Changes:             diff.Changes,
+		Changes:             modifiedChanges,
 		DeleteBeforeReplace: diff.DeleteBeforeReplace,
 		StableKeys:          diff.StableKeys,
 	}, nil
