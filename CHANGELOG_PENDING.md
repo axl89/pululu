@@ -9,7 +9,7 @@
 - [auto/nodejs] - Fail early when multiple versions of `@pulumi/pulumi` are detected in nodejs inline programs.'
   [#7349](https://github.com/pulumi/pulumi/pull/7349)
 
-- [sdk/go] - Add preliminary support for unmarshaling plain arrays and maps of output values.
+- [sdk/go] - Add preliminary support for unmarshalling plain arrays and maps of output values.
   [#7369](https://github.com/pulumi/pulumi/pull/7369)
 
 ### Bug Fixes
@@ -31,3 +31,6 @@
 
 - [codegen/python] - Include enum docstrings for python.
   [#7374](https://github.com/pulumi/pulumi/pull/7374)
+
+- [codegen/go] - Reimplement strict go enums to be Inputty.
+  [#7383](https://github.com/pulumi/pulumi/pull/7383)
